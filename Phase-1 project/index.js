@@ -54,6 +54,9 @@ function showBackupTrailerLink(movieTitle) {
                 <p>${movie.year}</p>
             `;
             movieCard.onclick = () => displayMovie(movie);
+            movieCard.addEventListener("click",(e) => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            })
             movieListContainer.appendChild(movieCard);
         });
     }

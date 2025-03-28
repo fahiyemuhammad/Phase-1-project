@@ -81,6 +81,7 @@ h1 {
     height: 400px;
     margin-top: -5px;
     align-self: flex-start;
+    padding-left: 20px;
 }
 #movie-poster:hover{
     transform: scale(1.1);
