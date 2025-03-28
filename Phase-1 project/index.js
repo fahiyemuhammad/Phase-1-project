@@ -84,12 +84,79 @@ function showBackupTrailerLink(movieTitle) {
             .catch(error => console.error("Error fetching trailer:", error));
     }
 
-    searchBar.addEventListener("input", () => {
-        const query = searchBar.value.trim();
-        if (query.length > 2) {
-            fetchMovies(query);
+    searchBar.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            const query = searchBar.value.trim();
+            if (query.length > 0) { // Prevent empty searches
+                fetchMovies(query);
+            }
         }
     });
 
-    fetchMovies(); // Load default movies on page
+    document.querySelector("#search-button").addEventListener("click", (e) => {
+        const query = searchBar.value.trim();
+        if (query.length > 0) {
+            fetchMovies(query);
+        }
+    })
+    
+    const movieRatings = JSON.parse(localStorage.getItem("movieRatings")) || {};
+
+    
+    function renderStars(movieId, selectedRating = 0) {
+        const starContainer = document.getElementById("star-container");
+        starContainer.innerHTML = ""; 
+        starContainer.setAttribute("data-movie-id", movieId);
+    
+        for (let i = 1; i <= 5; i++) {
+            const star = document.createElement("span");
+            star.textContent = "★";
+            star.classList.add("star");
+            if (i <= selectedRating) star.classList.add("active");
+    
+            
+            star.addEventListener("click", () => {
+                saveRating(movieId, i);
+                renderStars(movieId, i);
+            });
+    
+            starContainer.appendChild(star);
+        }
+    }
+    
+    // Function to save rating
+    function saveRating(movieId, rating) {
+        if (!movieRatings[movieId]) movieRatings[movieId] = [];
+        movieRatings[movieId].push(rating);
+    
+        const avgRating = (
+            movieRatings[movieId].reduce((a, b) => a + b, 0) / movieRatings[movieId].length
+        ).toFixed(1);
+    
+        document.getElementById("average-rating").textContent = `Average Rating: ${avgRating}`;
+    
+        localStorage.setItem("movieRatings", JSON.stringify(movieRatings));
+    }
+    
+    function displayMovie(movie) {
+        document.getElementById("movie-title").textContent = movie.title;
+        document.getElementById("movie-year").textContent = `Year: ${movie.year}`;
+        document.getElementById("movie-poster").src = movie.poster;
+    
+        fetchYouTubeTrailer(movie.title);
+    
+        displayRatingSection(movie.imdbID);
+    }
+    
+    // Function to display rating UI when a movie is selected
+    function displayRatingSection(movieId) {
+        const avgRating = movieRatings[movieId]
+            ? (movieRatings[movieId].reduce((a, b) => a + b, 0) / movieRatings[movieId].length).toFixed(1)
+            : "0";
+    
+        document.getElementById("average-rating").textContent = `Average Rating: ${avgRating}`;
+        renderStars(movieId, movieRatings[movieId] ? Math.round(avgRating) : 0);
+        document.getElementById("rating-section").style.display = "block";
+    }
+    fetchMovies(); // Loading  default movies on page
 });

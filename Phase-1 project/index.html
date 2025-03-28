@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie trailer Application</title>
     <link rel="stylesheet" href="index.css">
+    
 </head>
 <body>
 
     <header>
         <h1>🎬 TRAILER FLEX</h1>
         <input type="search" id="search-bar" placeholder="Search for a movie...">
-
+        <button id="search-button">🔍</button>
     </header>
 
     <main>
     <div class="container">
-        <!-- <div class="logo-left"><img class="logo"src="images/Colorful Retro Illustrative Tasty Popcorn Logo.PNG" alt="logo-left"></div> -->
             <div id="movie-details">
                <img id="movie-poster"src="" alt="Movie Poster">
                 <div class="info">
@@ -27,7 +27,13 @@
                      <iframe id="trailer"width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
-        <!-- <div class="logo-left"><img class="logo"src="images/Colorful Retro Illustrative Tasty Popcorn Logo.PNG" alt="logo-right"></div> -->
+            <div id="rating-section">
+                <p>Rate this movie:</p>
+                <div class="stars" id="star-container" data-movie-id="">
+                  
+                </div>
+                <p id="average-rating">Average Rating: 0</p>
+              </div>
     </div>
 <h2>Other Movies</h2>
 <div id="movie-list"></div>
