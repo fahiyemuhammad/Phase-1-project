@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie trailer Application</title>
+    <link rel="stylesheet" href="index.css">
+    
+</head>
+<body>
+
+    <header>
+        <h1>🎬 TRAILER FLEX</h1>
+        <input type="search" id="search-bar" placeholder="Search for a movie...">
+        <button id="search-button">🔍</button>
+    </header>
+
+    <main>
+    <div class="container">
+            <div id="movie-details">
+               <img id="movie-poster"src="" alt="Movie Poster">
+                <div class="info">
+                  <h2 id="movie-title">MOVIE TITLE</h2>
+                  <p id="movie-year">Year</p>
+                </div>
+                <div id="trailer-container">
+                     <iframe id="trailer"width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div id="rating-section">
+                <p>Rate this movie:</p>
+                <div class="stars" id="star-container" data-movie-id="">
+                  
+                </div>
+                <p id="average-rating">Average Rating: 0</p>
+              </div>
+              <!--rating-->
+    </div>
+<h2>Other Movies</h2>
+<div id="movie-list"></div>
+<footer>
+    <p>&copy; 2025 Fahiye Muhammad. All rights reserved.  
+        This website and its content are protected by copyright law.  
+        Unauthorized reproduction or distribution is prohibited.</p>
+</footer>
+ </main>
+
+
+    <script type="module" src="index.js"></script>
+</body>
+</html>
